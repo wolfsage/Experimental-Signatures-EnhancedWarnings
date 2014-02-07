@@ -1,0 +1,56 @@
+Experimental-Signatures-EnhancedWarnings version 0.01
+=====================================================
+
+Experimental::Signatures::EnhancedWarnings - Make Perl 5.20 signature warnings more useful
+
+
+SYNOPSIS
+--------
+
+  use feature qw(signatures);
+  no warnings 'experimental::signatures';
+  use Experimental::Signatures::EnhancedWarnings;
+
+  # Proceed as normal...
+
+
+DESCRIPTION
+-----------
+
+Currently, warnings from subs with signatures show incorrect file/line numbers
+(the file/line where the sub was defined, NOT where it was called from.) This
+module attempts to remedy that by injecting itself into calls to Perl_pp_die(),
+and checking for one of the three errors that signatures may throw:
+
+    * Too few arguments for subroutine
+
+    * Too many arguments for subroutine
+
+    * Odd name/value argument for subroutine
+
+
+WARNING: This means that if you manually call "die()" with any of the three warnings
+above, your errors may report incorrect information.
+
+
+SEE ALSO
+--------
+
+See "perldoc perlsub", subsection "signatures" for more information about signatures.
+
+
+AUTHOR
+------
+
+Matthew Horsfall (alh) - <wolfsage@gmail.com>
+
+
+COPYRIGHT AND LICENSE
+---------------------
+
+Copyright (C) 2014 by Matthew Horsfall
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.14.2 or,
+at your option, any later version of Perl 5 you may have available.
+
